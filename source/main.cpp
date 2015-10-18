@@ -4,15 +4,14 @@
 void shutdown3DS()
 {
 	Handle ptmSysmHandle = 0;
-	Result result = srvGetServiceHandle(&ptmSysmHandle, "ptm:sysm");
+	Result result = srvGetServiceHandle(&ptmSysmHandle, "ns:s");
 	if (result != 0)
 		return;
 
+	// http://3dbrew.org/wiki/NSS:ShutdownAsync
+
 	u32 *commandBuffer = getThreadCommandBuffer();
-	commandBuffer[0] = 0x040700C0; //ptm:sysm::ShutdownAsync
-	commandBuffer[1] = 0;
-	commandBuffer[2] = 0;
-	commandBuffer[3] = 0;
+	commandBuffer[0] = 0x000E0000;
 
 	svcSendSyncRequest(ptmSysmHandle);
 	svcCloseHandle(ptmSysmHandle);

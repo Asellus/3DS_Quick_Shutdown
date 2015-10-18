@@ -169,7 +169,7 @@ AccessControlInfo:
    - news:u
    - nwm::UDS
    - ptm:u
-   - ptm:sysm
+   - ns:s
    - pxi:dev
    - soc:U
    - ssl:C
