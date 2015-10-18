@@ -9,7 +9,7 @@ void shutdown3DS()
 		return;
 
 	u32 *commandBuffer = getThreadCommandBuffer();
-	commandBuffer[0] = 0x040700C0; //ptm:s::ShutdownAsync
+	commandBuffer[0] = 0x040700C0; //ptm:sysm::ShutdownAsync
 	commandBuffer[1] = 0;
 	commandBuffer[2] = 0;
 	commandBuffer[3] = 0;
