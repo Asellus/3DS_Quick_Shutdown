@@ -19,17 +19,17 @@ void shutdown3DS()
 }
 
 int main(int argc, char **argv) {
-    hidScanInput();
-        
+	hidScanInput();
+	
 	// If any key is pressed, cancel the shutdown.
 	if (hidKeysDown() != 0)
 		goto done;
 
 	shutdown3DS();
-    
+
 done:
 	// Hack: the 3ds crashes ("An error has occcurred.") for some reason
 	// without one iteration of the main loop.
 	aptMainLoop();
-    return 0;
+	return 0;
 }
