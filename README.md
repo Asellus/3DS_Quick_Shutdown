@@ -1,4 +1,4 @@
-<b><center><h1>3DS Quick Shutdown</h></center></b>
+<b><center>3DS Quick Shutdown</center></b>
 ==========
 
 This app will shut down your 3DS upon running it. If you don't want to shutdown, just hold any button and it'll exit immediately.
