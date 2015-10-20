@@ -20,10 +20,11 @@ void shutdown3DS()
 int main(int argc, char **argv) {
 	hidScanInput();
 	
+#ifndef ALWAYS_SHUTDOWN
 	// If any key is pressed, cancel the shutdown.
 	if (hidKeysDown() != 0)
 		goto done;
-
+#endif
 	shutdown3DS();
 
 done:

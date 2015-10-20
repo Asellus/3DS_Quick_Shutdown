@@ -38,8 +38,8 @@ ICON := $(RESOURCES)/icon.png
 ARCH := -march=armv6k -mtune=mpcore -mfloat-abi=hard
 
 COMMON_FLAGS := -g -Wall -Wno-strict-aliasing -O3 -mword-relocations -fomit-frame-pointer -ffast-math $(ARCH) $(INCLUDE) -DARM11 -D_3DS $(BUILD_FLAGS)
-CFLAGS := $(COMMON_FLAGS) -std=gnu99
-CXXFLAGS := $(COMMON_FLAGS) -std=gnu++11
+CFLAGS := $(COMMON_FLAGS) $(DEFINES) -std=gnu99
+CXXFLAGS := $(COMMON_FLAGS) $(DEFINES) -std=gnu++11
 ifeq ($(ENABLE_EXCEPTIONS),)
 	CXXFLAGS += -fno-rtti -fno-exceptions
 endif
@@ -49,6 +49,7 @@ LDFLAGS = -specs=3dsx.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 
 LIBS := -lctru -lm
 LIBDIRS := $(PORTLIBS) $(CTRULIB) ./lib
+DEFINES :=
 
 #---------------------------------------------------------------------------------
 ifneq ($(BUILD),$(notdir $(CURDIR)))
@@ -79,6 +80,10 @@ export DEPSDIR := $(CURDIR)/$(BUILD)
 export VPATH := $(foreach dir,$(SOURCES),$(CURDIR)/$(dir) $(call recurse,d,$(CURDIR)/$(dir),*)) $(foreach dir,$(DATA),$(CURDIR)/$(dir) $(call recurse,d,$(CURDIR)/$(dir),*))
 
 export TOPDIR := $(CURDIR)
+
+ifeq ($(ALWAYS_SHUTDOWN), 1)
+	export DEFINES := -DALWAYS_SHUTDOWN
+endif
 
 .PHONY: $(BUILD) clean all
 
