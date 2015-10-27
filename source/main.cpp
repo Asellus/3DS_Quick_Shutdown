@@ -3,8 +3,8 @@
 
 void shutdown3DS()
 {
-	Handle ptmSysmHandle = 0;
-	Result result = srvGetServiceHandle(&ptmSysmHandle, "ns:s");
+	Handle nssHandle = 0;
+	Result result = srvGetServiceHandle(&nssHandle, "ns:s");
 	if (result != 0)
 		return;
 
@@ -13,8 +13,8 @@ void shutdown3DS()
 	u32 *commandBuffer = getThreadCommandBuffer();
 	commandBuffer[0] = 0x000E0000;
 
-	svcSendSyncRequest(ptmSysmHandle);
-	svcCloseHandle(ptmSysmHandle);
+	svcSendSyncRequest(nssHandle);
+	svcCloseHandle(nssHandle);
 }
 
 int main(int argc, char **argv) {
