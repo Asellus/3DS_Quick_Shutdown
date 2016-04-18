@@ -1,5 +1,5 @@
 APP_TITLE = 3DS Quick Shutdown
-APP_DESCRIPTION = Shut down your 3DS quickly, without using the power button.
-APP_AUTHOR = thedax
+APP_DESCRIPTION = 3DS Quick Shutdown more quickly
+APP_AUTHOR = Asellus
 APP_PRODUCT_CODE = CTR-P-STDN
 APP_UNIQUE_ID = 0xDA002

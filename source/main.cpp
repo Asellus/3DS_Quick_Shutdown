@@ -1,27 +1,36 @@
 #include <3ds.h>
-#include <stdio.h>
 
-// http://3dbrew.org/wiki/NSS:ShutdownAsync
-void NSS_ShutdownAsync(void)
-{
-	Handle nssHandle = 0;
-	Result result = srvGetServiceHandle(&nssHandle, "ns:s");
-	if (result != 0)
+// http://3dbrew.org/wiki/PTM:ShutdownAsync
+void PTM_ShutdownAsync(void) {
+
+	Handle ptmSysmHandle = 0;
+	Result result = srvGetServiceHandle(&ptmSysmHandle, "ptm:sysm");
+	if (result != 0) {
 		return;
+	}
 
 	u32 *commandBuffer = getThreadCommandBuffer();
-	commandBuffer[0] = 0x000E0000;
+	commandBuffer[0] = 0x040700C0;
+	commandBuffer[1] = 0x00000000;
+	commandBuffer[2] = 0x00000000;
+	commandBuffer[3] = 0x00000000;
 
-	svcSendSyncRequest(nssHandle);
-	svcCloseHandle(nssHandle);
+	svcSendSyncRequest(ptmSysmHandle);
+	svcCloseHandle(ptmSysmHandle);
 }
 
-int main(int argc, char **argv) 
-{
-	NSS_ShutdownAsync();
+int main(int argc, char **argv) {
 
-	// Hack: the 3ds crashes ("An error has occcurred.") for some reason
+	// Initialize services
+	ptmSysmInit();
+
 	// without one iteration of the APT main loop.
 	aptMainLoop();
+
+	// Shutdown 3DS
+	PTM_ShutdownAsync();
+
+	// Exit services
+	ptmSysmExit();
 	return 0;
 }
