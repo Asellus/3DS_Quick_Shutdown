@@ -1,5 +1,5 @@
-3DS Quick Shutdown
-==========
+3DS Quick Shutdown more quickly
+================================
 
 3DS Quick Shutdown more quickly.
 
