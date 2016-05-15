@@ -3,8 +3,10 @@
 // http://3dbrew.org/wiki/PTM:ShutdownAsync
 void PTM_ShutdownAsync(void) {
 
-	Handle ptmSysmHandle = 0;
-	Result result = srvGetServiceHandle(&ptmSysmHandle, "ptm:sysm");
+	ptmSysmInit();
+
+	Handle serviceHandle = 0;
+	Result result = srvGetServiceHandle(&serviceHandle, "ptm:sysm");
 	if (result != 0) {
 		return;
 	}
@@ -15,22 +17,18 @@ void PTM_ShutdownAsync(void) {
 	commandBuffer[2] = 0x00000000;
 	commandBuffer[3] = 0x00000000;
 
-	svcSendSyncRequest(ptmSysmHandle);
-	svcCloseHandle(ptmSysmHandle);
+	svcSendSyncRequest(serviceHandle);
+	svcCloseHandle(serviceHandle);
+
+	ptmSysmExit();
 }
 
 int main(int argc, char **argv) {
 
-	// Initialize services
-	ptmSysmInit();
-
 	// without one iteration of the APT main loop.
 	aptMainLoop();
 
-	// Shutdown 3DS
 	PTM_ShutdownAsync();
 
-	// Exit services
-	ptmSysmExit();
 	return 0;
 }
