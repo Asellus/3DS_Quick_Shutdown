@@ -2,4 +2,4 @@ APP_TITLE = 3DS Quick Shutdown
 APP_DESCRIPTION = 3DS Quick Shutdown more quickly
 APP_AUTHOR = Asellus
 APP_PRODUCT_CODE = AQShutdown
-APP_UNIQUE_ID = 0xFA001
+APP_UNIQUE_ID = 0xDA002
